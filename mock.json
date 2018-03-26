@@ -1,0 +1,45 @@
+{
+  "developers": [
+    {
+      "id": 1,
+      "name": "Fabio",
+      "surname": "Marcoccia",
+      "role": "Project Manager"
+    },
+    {
+      "id": 2,
+      "name": "Franco",
+      "surname": "De Angelis",
+      "role": "Developer"
+    },
+    {
+      "id": 3,
+      "name": "Simone",
+      "surname": "Telemaco",
+      "role": "Developer"
+    },
+    {
+      "id": 4,
+      "name": "Giulia",
+      "surname": "Castaldo",
+      "role": "Graphic designer"
+    }
+  ],
+  "users":[
+    {
+      "title":"Innovazione",
+      "subtitle": "Innovazione subtitle",
+      "text": "ADDKSDKSDKSLDK"
+    },
+    {
+      "title":"Innovazione 2",
+      "subtitle": "Innovazione subtitle 2",
+      "text": "ADDKSDKSDKSLDK"
+    },
+    {
+      "title":"Innovazione 3",
+      "subtitle": "Innovazione subtitle 3",
+      "text": "ADDKSDKSDKSLDK"
+    }
+  ]
+}

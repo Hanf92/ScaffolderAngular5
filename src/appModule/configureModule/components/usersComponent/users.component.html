@@ -1,0 +1,13 @@
+<!-- users template -->
+
+<p>Sono usersComponent in ConfigureModule</p>
+<spinner-loading-component [loading]="!(users$ | async)"></spinner-loading-component>
+
+<card-component
+                *ngFor="let user of users$ | async"
+                [title]="user?.title"
+                [subtitle]="user?.subtitle"
+                [text]="user?.text">
+</card-component>
+
+<!--*ngFor="let user of users"-->
