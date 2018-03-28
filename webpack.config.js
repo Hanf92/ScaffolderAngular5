@@ -69,7 +69,7 @@ module.exports = {
     modules: [path.resolve(PATH_SRC), "node_modules"],
     extensions: ['.js' ,'.ts']
   },
-  entry: path.resolve(PATH_SRC, './appModule/appModule.ts'),
+  entry: path.resolve(PATH_SRC, './appModule/main.ts'),
   output: {
     path: path.resolve(PATH_DIST),
     filename: '[name].[hash].js',

@@ -24,7 +24,7 @@ export const ROUTES: Routes = [
                 path: 'users/:id',
                 component: UserComponent,
             }]
-    }]
+    }];
 
 @NgModule({
     declarations: [ReportComponent, ListUserComponent, UserComponent],

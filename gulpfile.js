@@ -10,14 +10,14 @@ const replace = require('gulp-replace');
 
 (function () {
 
-        String.prototype.capitalize = function () {
-            return this.charAt(0).toUpperCase() + this.slice(1);
-        };
+    String.prototype.capitalize = function () {
+      return this.charAt(0).toUpperCase() + this.slice(1);
+    };
 
-        String.prototype.pathMinusOneSubDir = function () {
-            return this.split('/').slice(0,-1).join('/');
-        }
+    String.prototype.pathMinusOneSubDir = function () {
+      return this.split('/').slice(0,-1).join('/');
     }
+  }
 )(this);
 
 let modulePath;
@@ -25,11 +25,10 @@ let modulePath;
 const argv = yargs.argv;
 
 function parsePath() {
-    return through.obj(function (file, enc, cb) {
-        modulePath = path.resolve(file.path);
-        console.log('modulePath ',modulePath);
-        cb();
-    });
+  return through.obj(function (file, enc, cb) {
+    modulePath = path.resolve(file.path);
+    cb();
+  });
 }
 
 /**
@@ -39,94 +38,95 @@ function parsePath() {
  */
 
 gulp.task('module', (cb) => {
-    const moduleName = argv.name;
-const path = argv.path;
-if(!moduleName || moduleName === undefined || moduleName == null) {
+  const moduleName = argv.name;
+  const path = argv.path;
+  if(!moduleName || moduleName === undefined || moduleName == null) {
     throw new Error('Module name can\'t be null');
-}
-if(!path || path === undefined || path == null) {
+  }
+  if(!path || path === undefined || path == null) {
     throw new Error('Path can\'t be null');
-}
+  }
 
-const templateData = {
+  const templateData = {
     moduleName: moduleName
-};
-const options = {
+  };
+  const options = {
     helpers : {
-        capitalize : function(str){
-            return str.capitalize();
-        }
+      capitalize : function(str){
+        return str.capitalize();
+      }
     }
-};
+  };
 
-return gulp.src('templates/module.hbs')
+  return gulp.src('templates/module.hbs')
     .pipe(handlebars(templateData,options))
     .pipe(rename(moduleName+'Module.ts'))
     .pipe(gulp.dest(path+'/'+moduleName+'Module'));
 
 });
+
 /**
  * Define as argument:
  * ModuleName as --module (name folder example appModule),
- * ComponentName as --alias (name component example Fake),
+ * ComponentName as --alias (name component example card),
  */
 gulp.task('component',['searchPath'], (cb) => {
-    let moduleName = argv.module;
-const componentName = argv.alias;
+  let moduleName = argv.module;
+  const componentName = argv.alias;
 
-if(!componentName || componentName === undefined || componentName == null){
+  if(!componentName || componentName === undefined || componentName == null){
     throw new Error('Component Name can\'t be null');
-}
-if(!moduleName || moduleName === undefined || moduleName == null) {
+  }
+  if(!moduleName || moduleName === undefined || moduleName == null) {
     throw new Error('Module Name can\'t be null');
-}
+  }
 
-const templateData = {
+  const templateData = {
     componentName: componentName
-};
-const options = {
+  };
+  const options = {
     helpers : {
-        capitalize : function(str){
-            return str.capitalize();
-        }
+      capitalize : function(str){
+        return str.capitalize();
+      }
     }
-};
+  };
 
-console.log('sourcePath test ', modulePath);
+  console.log('modulePath ->', modulePath);
 
-const createComponent =
+  const createComponent =
     gulp.src('templates/component.hbs')
-        .pipe(handlebars(templateData,options))
-        .pipe(rename(`${componentName}.component.ts`))
-        .pipe(gulp.dest(`${modulePath}/components/${componentName}Component`));
-const createHtml =
+      .pipe(handlebars(templateData,options))
+      .pipe(rename(`${componentName}.component.ts`))
+      .pipe(gulp.dest(`${modulePath}/components/${componentName}Component`));
+  const createHtml =
     gulp.src('templates/template.hbs')
-        .pipe(handlebars(templateData,options))
-        .pipe(rename(`${componentName}.component.html`))
-        .pipe(gulp.dest(`${modulePath}/components/${componentName}Component`));
-const createSass =
+      .pipe(handlebars(templateData,options))
+      .pipe(rename(`${componentName}.component.html`))
+      .pipe(gulp.dest(`${modulePath}/components/${componentName}Component`));
+  const createSass =
     gulp.src('templates/style.hbs')
-        .pipe(handlebars(templateData,options))
-        .pipe(rename(`${componentName}.component.scss`))
-        .pipe(gulp.dest(`${modulePath}/components/${componentName}Component`));
+      .pipe(handlebars(templateData,options))
+      .pipe(rename(`${componentName}.component.scss`))
+      .pipe(gulp.dest(`${modulePath}/components/${componentName}Component`));
 
 //TODO fix path
 
-//const addAndImportComponentInModule =
-//  gulp.src(`src/**/*${moduleName}/${moduleName}.ts`)
-//    .pipe(replace('/*@addComponent*/', function () {
-//      return `${componentName.capitalize()}Component, /*@addComponent*/`;
-//    }))
-//    .pipe(replace('/*@addImport*/', `import {${componentName.capitalize()}Component} from './${componentName}Component/${componentName}.component' \n/*@addImport*/`))
-//   .pipe(gulp.dest(`.${modulePathMinusOneSubDir}`));
+  //const addAndImportComponentInModule =
+    //gulp.src(`src/**/*${moduleName}/${moduleName}.ts`)
+      //.pipe(replace('/*@addComponent*/', function () {
+        //return `${componentName.capitalize()}Component, /*@addComponent*/`;
+      //}))
+      //.pipe(replace('/*@addImport*/', `import {${componentName.capitalize()}Component} from './${componentName}Component/${componentName}.component' \n/*@addImport*/`))
+      //.pipe(gulp.dest(`${modulePathMinusOneSubDir}`));
 
-return merge(createComponent, createHtml, createSass);
+  return merge(createComponent, createHtml, createSass);
 
 });
 
 gulp.task('searchPath', ()=> {
-    let moduleName = argv.module;
-console.log('moduleName ', moduleName);
-return gulp.src(`src/**/*${moduleName}/`)
+  let moduleName = argv.module;
+  console.log('moduleName ->', moduleName);
+  return gulp.src(`src/**/*${moduleName}/`)
     .pipe(parsePath())
 });

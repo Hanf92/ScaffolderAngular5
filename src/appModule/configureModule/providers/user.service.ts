@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {CommunicationService} from "../../providers/communicationService";
+import {CommunicationService} from "../../providers/communication.service";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
 import "rxjs/add/observable/of";
-import {UsersCard} from "../models/users";
+import {UsersCard} from "../models/users.model";
 
 @Injectable()
 export class UserService {
