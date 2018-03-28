@@ -35,7 +35,7 @@ npm run start-dev
 ## Deployment
 To make build package run
 ```
-npm build-dev
+npm run build-dev
 ```
 To create other environment add config json in folder config and add npm script in package.json
 
