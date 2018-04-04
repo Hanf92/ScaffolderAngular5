@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {CommunicationService} from "../../providers/communication.service";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
-import {Developer} from "../models/developer.model";
-import {DevelopersStore} from "./developers.store";
 import "rxjs/add/observable/of";
 import {Observer} from "rxjs/Observer";
+
+import {CommunicationService} from "../../providers/communication.service";
+import {Developer} from "../models/developer.model";
+import {DevelopersStore} from "./developers.store";
 
 @Injectable()
 export class DevelopersService {

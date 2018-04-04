@@ -6,6 +6,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const PATH_SRC = './src';
 const PATH_DIST = './dist';
@@ -64,6 +65,8 @@ CommonsChunkPlugin  = new webpack.optimize.CommonsChunkPlugin({
   minChunks: (module) => module.context && /node_modules/.test(module.context)
 });
 
+CopyWebpackPlugin = new CopyWebpackPlugin([ { from: 'src/assets', to: 'assets' } ]);
+
 module.exports = {
   resolve:{
     modules: [path.resolve(PATH_SRC), "node_modules"],
@@ -85,6 +88,10 @@ module.exports = {
         use: ExtractTextPlugin.extract({
           use: [{loader: "css-loader"}, {loader: "sass-loader"}]
         })
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   },
@@ -95,7 +102,8 @@ module.exports = {
     ExtractTextPlugin,
     ContextReplacementPlugin,
     CommonsChunkPlugin,
-    DefinePlugin
+    DefinePlugin,
+    CopyWebpackPlugin
   ],
   devServer: {
     contentBase: path.resolve(PATH_DIST),

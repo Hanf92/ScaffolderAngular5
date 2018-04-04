@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {CommonModule} from "@angular/common";
+
 import {DevResolver} from "./resolver/devResolver";
 import {ReportComponent} from "./components/reportComponent/report.component";
 import {ListUserComponent} from "./components/listUserComponent/listUser.component";
