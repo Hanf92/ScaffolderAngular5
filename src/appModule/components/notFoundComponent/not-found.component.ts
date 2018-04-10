@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import './notFound.component.scss';
+import './not-found.component.scss';
 
 @Component({
     selector: 'notFound-component',
-    templateUrl: 'notFound.component.html'
+    templateUrl: 'not-found.component.html'
 })
 export class NotFoundComponent {
 

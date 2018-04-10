@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
-import './spinnerLoading.component.scss';
+import './spinner-loading.component.scss';
 
 @Component({
     selector: 'spinner-loading-component',
-    templateUrl: 'spinnerLoading.component.html'
+    templateUrl: 'spinner-loading.component.html'
 })
 export class SpinnerLoadingComponent {
 

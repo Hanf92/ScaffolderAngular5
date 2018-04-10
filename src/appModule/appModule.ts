@@ -8,7 +8,7 @@ import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/h
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 import {ApprootComponent} from "./components/approotComponent/approot.component";
-import {NotFoundComponent} from "./components/notFoundComponent/notFound.component";
+import {NotFoundComponent} from "./components/notFoundComponent/not-found.component";
 import {CommunicationService} from "./providers/communication.service";
 import {InterceptorService} from "./providers/interceptor.service";
 import {UtilsService} from "./providers/utils.service";
