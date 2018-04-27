@@ -8,17 +8,16 @@ declare var _CONF: Configuration;
 @Injectable()
 export class CommunicationService {
 
-    private subject$ = new Subject();
-
     constructor(private httpClient: HttpClient) { }
 
     public get<T>(api: string): Observable<any>{
+        const subject$ = new Subject();
         this.httpClient.get(`${_CONF.endpoint}${api}`)
             .subscribe((response) => {
-                this.subject$.next(response)
+                subject$.next(response)
             }, (error)=>{
-                this.subject$.error(error)
+                subject$.error(error)
             });
-        return this.subject$;
+        return subject$;
     }
 }
